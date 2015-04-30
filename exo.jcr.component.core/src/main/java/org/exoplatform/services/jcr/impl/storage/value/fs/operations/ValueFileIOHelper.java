@@ -37,10 +37,10 @@ import java.nio.channels.WritableByteChannel;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * <br/>
  * Date: 03.04.2009
- * 
+ *
  * @author <a href="mailto:peter.nedonosko@exoplatform.com.ua">Peter Nedonosko</a>
  * @version $Id: ValueFileIOHelper.java 34801 2009-07-31 15:44:50Z dkatayev $
  */
@@ -59,7 +59,7 @@ public class ValueFileIOHelper
 
    /**
     * Write value to a file.
-    * 
+    *
     * @param file
     *          File
     * @param value
@@ -81,7 +81,7 @@ public class ValueFileIOHelper
 
    /**
     * Write value array of bytes to a file.
-    * 
+    *
     * @param file
     *          File
     * @param value
@@ -104,7 +104,7 @@ public class ValueFileIOHelper
 
    /**
     * Write streamed value to a file.
-    * 
+    *
     * @param file
     *          File
     * @param value
@@ -114,6 +114,12 @@ public class ValueFileIOHelper
     */
    protected void writeStreamedValue(File file, ValueData value) throws IOException
    {
+       String path = file == null ? null : file.getAbsolutePath();
+       LOG.info("About to writeStreamedValue('"+ path +"', "+ value +")");
+       if (path != null) {
+           LOG.info("     The path "+ (file.exists() ? "exists" : "does not exist") +" '"+ path +"'");
+           LOG.info("     The path.parent "+ (file.getParentFile().exists() ? "exists" : "does not exist") +" '"+ path +"'");
+       }
       // stream Value
       if (value instanceof StreamPersistedValueData)
       {
@@ -163,7 +169,7 @@ public class ValueFileIOHelper
 
    /**
     * Stream value data to the output.
-    * 
+    *
     * @param out
     *          OutputStream
     * @param value
@@ -217,7 +223,7 @@ public class ValueFileIOHelper
 
    /**
     * Copy input to output data using NIO.
-    * 
+    *
     * @param in
     *          InputStream
     * @param out
@@ -282,7 +288,7 @@ public class ValueFileIOHelper
    /**
     * Copy input to output data using NIO. Input and output streams will be closed after the
     * operation.
-    * 
+    *
     * @param in
     *          InputStream
     * @param out
